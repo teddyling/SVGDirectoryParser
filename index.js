@@ -63,7 +63,7 @@ function parseSVGFile(fileName, svgContent) {
   file_object.width = dom.window.document
     .querySelector("svg")
     .getAttribute("width");
-  //console.log(file_object);
+
   let path_id = 0;
 
   for (let svgPath of svgPaths) {
@@ -71,11 +71,13 @@ function parseSVGFile(fileName, svgContent) {
     const path_object = new SVG_Path(color);
     path_object.id = path_id;
     const commandArray = parseSVG(svgPath.getAttribute("d"));
-    //console.log(commandArray);
+
     path_object.operations = commandArray.map((obj) => ({ ...obj }));
     const [x1, y1, x2, y2] = svgPathBbox(svgPath.getAttribute("d"));
-    //console.log(x1, y1, x2, y2);
-    path_object.bounding_box = bboxToObject(x1, y1, x2, y2);
+    const hrefTextElement = svgPath.parentElement;
+    const pathText = hrefTextElement.getAttribute("xlink:href") || null;
+
+    path_object.bounding_box = bboxToObject(x1, y1, x2, y2, pathText);
     file_object.paths.push(path_object);
     path_id++;
   }
@@ -100,8 +102,8 @@ function parseColor(styleString) {
 }
 // This function will take the two bounding points of a bounding box rectangle and return a bounding_box object.
 //This object will later be added to the SVG_Path object as a property.
-function bboxToObject(x1, y1, x2, y2) {
-  return new SVG_Path_Bbox(x1, y1, x2, y2);
+function bboxToObject(x1, y1, x2, y2, text) {
+  return new SVG_Path_Bbox(x1, y1, x2, y2, text);
 }
 // This function will transform any object into a well-formatted JSON string.
 function objectToJson(obj) {
