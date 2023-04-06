@@ -13,8 +13,8 @@ The format of the command to run this parser is:
 node index.js "readDirectory" "writeDirectory"
 Substitute the readDirectory and the writeDirectory with your specified directories. 
 
-The <readDirectory> can either be a relative directory or an absolute directory. If the readDirectory can not be found, an error will be thrown, and the parsing will not take place. 
+The "readDirectory" can either be a relative directory or an absolute directory. If the readDirectory can not be found, an error will be thrown, and the parsing will not take place. 
 
-The <writeDirectory> can either be a relative directory or an absolute directory. If the writeDirectory can not be found, it will be automatically created, and the txt files containing JSON objects will be located inside. 
+The "writeDirectory" can either be a relative directory or an absolute directory. If the writeDirectory can not be found, it will be automatically created, and the txt files containing JSON objects will be located inside. 
 
 Right now, the parser can process 620 SVG files in around 2 minutes and process 5000 SVG files in around 21 minutes. 
