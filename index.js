@@ -4,6 +4,8 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const parseSVG = require("svg-path-parser");
 const svgPathBbox = require("svg-path-bbox");
+const ntc = require("ntc");
+
 const { SVG_File, SVG_Path, SVG_Path_Bbox } = require("./classes");
 
 const COLOR = {
@@ -67,8 +69,8 @@ function parseSVGFile(fileName, svgContent) {
   let path_id = 0;
 
   for (let svgPath of svgPaths) {
-    const color = parseColor(svgPath.getAttribute("style"));
-    const path_object = new SVG_Path(color);
+    const style = parseStyle(svgPath.getAttribute("style"));
+    const path_object = new SVG_Path(style);
     path_object.id = path_id;
     const commandArray = parseSVG(svgPath.getAttribute("d"));
 
@@ -86,19 +88,30 @@ function parseSVGFile(fileName, svgContent) {
 }
 
 // This function will take the style string (from the SVG path's style attribute) and return the color of this path as a string.
-function parseColor(styleString) {
+function parseStyle(styleString) {
   const styleArray = styleString.split("; ");
-  let color = null;
-  for (let el of styleArray) {
-    const subArray = el.split(": ");
-    if (
-      (subArray[0] === "fill" && subArray[1] != "none") ||
-      subArray[0] === "stroke"
-    ) {
-      color = COLOR[subArray[1]];
-      return color;
-    }
+  const styleObj = {};
+  styleArray.forEach((el) => {
+    const pair = el.split(": ");
+    styleObj[pair[0]] = pair[1];
+  });
+
+  //console.log(styleObj);
+  if (
+    styleObj.fill &&
+    styleObj.fill != "none" &&
+    !styleObj.fill.startsWith("url")
+  ) {
+    styleObj.fill = ntc.name(styleObj.fill)[1];
   }
+  if (
+    styleObj.stroke &&
+    styleObj.stroke != "none" &&
+    !styleObj.stroke.startsWith("url")
+  ) {
+    styleObj.stroke = ntc.name(styleObj.stroke)[1];
+  }
+  return styleObj;
 }
 // This function will take the two bounding points of a bounding box rectangle and return a bounding_box object.
 //This object will later be added to the SVG_Path object as a property.

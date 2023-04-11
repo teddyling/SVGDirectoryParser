@@ -27,7 +27,7 @@ JSON Structure:
     "paths": An array of path object, with the format of:
         {
             "id": The path id
-            "color": The path color
+            "Style": The path style
             "operation": An array of all path operation, in the format of:
                 {
                     "code": The operation code (M/L/C...)

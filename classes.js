@@ -8,9 +8,9 @@ class SVG_File {
 }
 
 class SVG_Path {
-  constructor(color) {
+  constructor(style) {
     this.id = null;
-    this.color = color;
+    this.style = style;
     this.operations = null;
     this.bounding_box = null;
   }

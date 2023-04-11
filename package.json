@@ -1,17 +1,18 @@
 {
   "name": "svgfileparser",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A parser that parses SVG file paths into JSON files. ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Taichen Ling",
   "license": "ISC",
   "dependencies": {
     "jsdom": "^21.1.1",
     "nodemon": "^2.0.22",
+    "ntc": "^0.0.1",
     "svg-path-bbox": "^1.2.4",
     "svg-path-parser": "^1.1.0"
   }
