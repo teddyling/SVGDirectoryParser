@@ -96,21 +96,6 @@ function parseStyle(styleString) {
     styleObj[pair[0]] = pair[1];
   });
 
-  //console.log(styleObj);
-  if (
-    styleObj.fill &&
-    styleObj.fill != "none" &&
-    !styleObj.fill.startsWith("url")
-  ) {
-    styleObj.fill = ntc.name(styleObj.fill)[1];
-  }
-  if (
-    styleObj.stroke &&
-    styleObj.stroke != "none" &&
-    !styleObj.stroke.startsWith("url")
-  ) {
-    styleObj.stroke = ntc.name(styleObj.stroke)[1];
-  }
   return styleObj;
 }
 // This function will take the two bounding points of a bounding box rectangle and return a bounding_box object.
