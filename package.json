@@ -1,6 +1,6 @@
 {
   "name": "svgfileparser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A parser that parses SVG file paths into JSON files. ",
   "main": "index.js",
   "scripts": {
