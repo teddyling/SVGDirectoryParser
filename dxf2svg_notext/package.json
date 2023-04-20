@@ -1,0 +1,18 @@
+{
+  "name": "dxf2svg_notext",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Taichen Ling",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dxf": "^5.0.0",
+    "jsdom": "^21.1.1"
+  }
+}
